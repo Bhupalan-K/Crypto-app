@@ -1,0 +1,63 @@
+.about {
+    padding: 0 100px;
+}
+
+.about .sidemenu {
+    position: fixed;
+    right: -200px;
+    list-style: none;
+    width: 90px;
+    padding: 10px;
+    background: white;
+    color: #000;
+    transition: right 0.5s;
+    border-radius: 10px;
+    border: 1px solid var(--sidemenu-border);
+}
+
+.about .sidemenu li {
+    margin-top: 15px;
+}
+
+.about .about-menu {
+    display: none;
+}
+
+.about .about-div {
+    margin: 15px;
+}
+
+.about .about-div h2 {
+    margin-bottom: 5px;
+}
+
+.about .learnings {
+    margin: 10px;
+}
+
+.about .learnings .first {
+    font-size: 25px;
+    margin-top: 10px;
+}
+
+.about .learnings .headings {
+    font-size: 22px;
+    margin-top: 15px;
+}
+
+@media (max-width: 768px) {
+    .about {
+        padding: 0 10px;
+        margin: auto;
+    }
+
+    .about .about-menu {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
+
+    .about .about-menu i {
+        font-size: 1.5rem;
+    }
+}

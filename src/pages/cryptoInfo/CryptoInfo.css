@@ -1,0 +1,68 @@
+.crypto {
+    padding: 0 80px 10px;
+    position: sticky;
+}
+
+.crypto .intro {
+    margin-top: 10px;
+}
+
+p {
+    padding-left: 6px;
+    text-wrap: wrap;
+}
+
+.crypto .sidemenu {
+    position: fixed;
+    right: -200px;
+    list-style: none;
+    width: 90px;
+    padding: 10px;
+    background: white;
+    color: #000;
+    transition: right 0.5s;
+    border-radius: 10px;
+    border: 1px solid var(--sidemenu-border);
+
+}
+
+.crypto .sidemenu li {
+    margin-top: 15px;
+}
+
+.crypto .crypto-menu {
+    display: none;
+}
+
+.hedings-div {
+    margin-bottom: 10px;
+}
+
+.hedings-div .heading {
+    margin-top: 10px;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.hedings-div .side-heading {
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .crypto {
+        padding: 0 10px;
+        margin: auto;
+    }
+
+    .crypto .crypto-menu {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
+
+    .crypto .crypto-menu i {
+        font-size: 1.5rem;
+    }
+}
