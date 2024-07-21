@@ -48,6 +48,9 @@
     width: 75%;
     line-height: 1.5;
 }
+.content p span{
+    color: var(--alert-color);
+}
 
 .content form {
     padding: 8px;
@@ -192,7 +195,6 @@
     }
 
     .table-items:hover {
-        color: #dde4de;
         transform: translateY(-10px);
         text-decoration: 1px underline;
     }
@@ -249,7 +251,6 @@
     }
 
     .table-items:hover {
-        color: #dde4de;
         transform: translateY(-10px);
         text-decoration: 1px underline;
     }

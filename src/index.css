@@ -14,13 +14,14 @@ a {
 
 .app-light {
     min-height: 100vh;
-    --body-background: white;
+    --body-background: #FFFFF7;
     --body-color: #000;
     --box-border: #000;
-    --table-body-background: white;
+    --table-body-background: #FFFFF7;
     --chart-body: grey;
     --sidemenu-border: #000;
     --table-border: #000;
+    --alert-color: #FFCC00;
 }
 
 .app-dark {
@@ -31,4 +32,5 @@ a {
     --body-background: #1A3636;
     --table-border: white;
     --table-body-background: linear-gradient(rgba(0, 100, 0, 0.5), rgba(84, 3, 255, 0.15));
+    --alert-color: yellow;
 }
