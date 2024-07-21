@@ -55,7 +55,9 @@ const Home = () => {
         <h1>Crypto Tracker !</h1>
         <p>Welcome to Crypto Tracker,
           The Future of Money is Digital. Embrace It<br/>
-          <span>(Click on Table Coins to see Prices in Charts)</span>
+          <span>(Click on Table Coins to see Prices in {coins && coins.length > 0 && (
+          <Link to={`/coin/${coins[0].id}`}><span>Charts</span></Link>
+        )})</span>
         </p>
         <form onSubmit={handleSearch} >
           <input type='text' placeholder='Search cryptos'

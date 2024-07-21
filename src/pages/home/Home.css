@@ -51,6 +51,9 @@
 .content p span{
     color: var(--alert-color);
 }
+.content p span span{
+    text-decoration: underline blue;  
+}
 
 .content form {
     padding: 8px;
