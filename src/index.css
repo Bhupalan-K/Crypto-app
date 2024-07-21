@@ -14,10 +14,10 @@ a {
 
 .app-light {
     min-height: 100vh;
-    --body-background: #FFFFF7;
+    --body-background: white;
     --body-color: #000;
     --box-border: #000;
-    --table-body-background: #FFFFF7;
+    --table-body-background: white;
     --chart-body: grey;
     --sidemenu-border: #000;
     --table-border: #000;
