@@ -115,7 +115,6 @@ const Coin = () => {
           <select value={chartValue} onChange={e => setChartValue(e.target.value)} >
             <option value="linechart">Line Chart</option>
             <option value="barchart">Bar Chart</option>
-            <option value="piechart">Pie Chart</option>
           </select>
         </div>
         <div className="coin-info">
