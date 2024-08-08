@@ -29,7 +29,7 @@ const Coin = () => {
     navigate(`/coin/${index}`)
   }
 
-  
+
   const fetchData = async () => {
     const options = {
       method: 'GET',
@@ -40,6 +40,7 @@ const Coin = () => {
       .then(response => response.json())
       .then(response => setData(response))
       .catch(err => console.error(err));
+    console.log(res)
   }
 
   const fetchPastData = async (days, interval) => {
@@ -52,15 +53,16 @@ const Coin = () => {
       .then(response => response.json())
       .then(response => setPastData(response))
       .catch(err => console.error(err));
+    console.log(pastData)
   }
 
   useEffect(() => {
     fetchData()
-    if(periodData === '10days'){
+    if (periodData === '10days') {
       fetchPastData(10, 'daily')
-    } else if(periodData === 'month'){
+    } else if (periodData === 'month') {
       fetchPastData(30, 'daily')
-    } else if(periodData === 'year'){
+    } else if (periodData === 'year') {
       fetchPastData(365, 'daily')
     }
   }, [currency, coinId, periodData])
@@ -97,23 +99,24 @@ const Coin = () => {
           <div>
             <p onClick={prevButton}><i className="fa-solid fa-chevron-left" /><span>Prev</span></p>
             <select name="" id="" value={periodData} onChange={e => setPeriodData(e.target.value)}>
-            <option value="10days">Day</option>
-            <option value="month">Month</option>
-            <option value="year">Year</option>
-          </select>
-           
+              <option value="10days">10 Days</option>
+              <option value="month">Month</option>
+              <option value="year">Year</option>
+            </select>
+
             <p className='right-arrow' onClick={nextButton}><span >Next</span><i className="fa-solid fa-chevron-right" /></p>
           </div>
         </div>
         <div className="charts">
-          {chartValue === 'linechart' &&  <LineChart pastData={pastData} />}
-          {chartValue === 'barchart'  && <BarChart pastData={pastData} />}
+          {chartValue === 'linechart' && <LineChart pastData={pastData} />}
+          {chartValue === 'barchart' && <BarChart pastData={pastData} />}
         </div>
         <div className="period-data">
-        <select value={chartValue} onChange={e => setChartValue(e.target.value)} >
-              <option value="linechart">Line Chart</option>
-              <option value="barchart">Bar Chart</option>
-            </select>
+          <select value={chartValue} onChange={e => setChartValue(e.target.value)} >
+            <option value="linechart">Line Chart</option>
+            <option value="barchart">Bar Chart</option>
+            <option value="piechart">Pie Chart</option>
+          </select>
         </div>
         <div className="coin-info">
           <ul>
