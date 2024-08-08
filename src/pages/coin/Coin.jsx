@@ -4,7 +4,6 @@ import { Link, useParams, useNavigate } from 'react-router-dom'
 import { CoinContext } from '../../context/CoinContext';
 import LineChart from '../../components/charts/LineChart';
 import BarChart from '../../components/charts/BarChart';
-import PieChart from '../../components/charts/PieChart';
 
 const Coin = () => {
 
@@ -13,7 +12,8 @@ const Coin = () => {
   const [data, setData] = useState()
   const [pastData, setPastData] = useState()
   const { coins, currency } = useContext(CoinContext);
-  const [chartValue, setChartValue] = useState({ value: 'linechart' })
+  const [chartValue, setChartValue] = useState('linechart')
+  const [periodData, setPeriodData] = useState('10days')
   const menuRef = useRef(null);
 
   const nextButton = () => {
@@ -24,11 +24,12 @@ const Coin = () => {
   }
   const prevButton = () => {
     const curIndex = coins.findIndex((coin) => coin.id === coinId);
-    const nexIndex = (curIndex - 1) % coins.length;
+    const nexIndex = (curIndex - 1 + coins.length) % coins.length;
     const index = coins[nexIndex].id;
     navigate(`/coin/${index}`)
   }
 
+  
   const fetchData = async () => {
     const options = {
       method: 'GET',
@@ -41,13 +42,13 @@ const Coin = () => {
       .catch(err => console.error(err));
   }
 
-  const fetchPastData = async () => {
+  const fetchPastData = async (days, interval) => {
     const options = {
       method: 'GET',
       headers: { accept: 'application/json', 'x-cg-demo-api-key': 'CG-anrPktdYPUMGWjXSD9Jopvxw' }
     };
 
-    fetch(`https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=${currency.name}&days=10&interval=daily`, options)
+    fetch(`https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=${currency.name}&days=${days}&interval=${interval}`, options)
       .then(response => response.json())
       .then(response => setPastData(response))
       .catch(err => console.error(err));
@@ -55,8 +56,14 @@ const Coin = () => {
 
   useEffect(() => {
     fetchData()
-    fetchPastData()
-  }, [currency, coinId])
+    if(periodData === '10days'){
+      fetchPastData(10, 'daily')
+    } else if(periodData === 'month'){
+      fetchPastData(30, 'daily')
+    } else if(periodData === 'year'){
+      fetchPastData(365, 'daily')
+    }
+  }, [currency, coinId, periodData])
 
   const displaySidemenu = () => {
     if (menuRef.current) {
@@ -89,18 +96,24 @@ const Coin = () => {
         <div className='chart-options'>
           <div>
             <p onClick={prevButton}><i className="fa-solid fa-chevron-left" /><span>Prev</span></p>
-            <select value={chartValue} onChange={e => setChartValue({ value: e.target.value })} className='chart-option'>
-              <option value="linechart">Line Chart</option>
-              <option value="barchart">Bar Chart</option>
-              <option value="piechart">Pie Chart</option>
-            </select>
+            <select name="" id="" value={periodData} onChange={e => setPeriodData(e.target.value)}>
+            <option value="10days">Day</option>
+            <option value="month">Month</option>
+            <option value="year">Year</option>
+          </select>
+           
             <p className='right-arrow' onClick={nextButton}><span >Next</span><i className="fa-solid fa-chevron-right" /></p>
           </div>
         </div>
         <div className="charts">
-          {chartValue.value === 'linechart' && <LineChart pastData={pastData} />}
-          {chartValue.value === 'barchart' && <BarChart pastData={pastData} />}
-          {chartValue.value === 'piechart' && <PieChart pastData={pastData} />}
+          {chartValue === 'linechart' &&  <LineChart pastData={pastData} />}
+          {chartValue === 'barchart'  && <BarChart pastData={pastData} />}
+        </div>
+        <div className="period-data">
+        <select value={chartValue} onChange={e => setChartValue(e.target.value)} >
+              <option value="linechart">Line Chart</option>
+              <option value="barchart">Bar Chart</option>
+            </select>
         </div>
         <div className="coin-info">
           <ul>
@@ -131,6 +144,11 @@ const Coin = () => {
             <li>1 Hour Change</li>
             <li>{currency.symbol} {data.market_data.price_change_percentage_1h_in_currency
             [currency.name].toLocaleString()}</li>
+          </ul>
+          <ul>
+            <li>1 Hour Change in Percentage</li>
+            <li>{currency.symbol} {data.market_data.price_change_percentage_1h_in_currency
+            [currency.name].toFixed(2)}%</li>
           </ul>
         </div>
       </div>) : (

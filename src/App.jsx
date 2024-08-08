@@ -26,8 +26,6 @@ const App = () => {
     }
   }
 
-
-
   return (
     <div className='app-light' ref={colorMode}>
       <Nav

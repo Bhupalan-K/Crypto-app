@@ -117,6 +117,22 @@
     margin: 0 auto;
     border: 1px solid var(--body-color);
 }
+.period-data{
+    display: flex;
+    justify-content: center;margin-top: 10px;
+
+}
+.period-data select{
+    padding: 5px 8px;
+    border-radius: 4px;
+    border: 2px solid var(--body-color);
+    background: transparent;
+    color: var(--body-color);
+}
+.period-data select option{
+    background: var(--body-background);
+    color: var(--body-color);
+}
 
 .coin-info {
     max-width: 600px;
@@ -152,4 +168,5 @@
     .coin .coin-menu i {
         font-size: 1.5rem;
     }
+    
 }
