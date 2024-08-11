@@ -15,7 +15,6 @@
     transition: right 0.5s;
     border-radius: 10px;
     border: 1px solid var(--sidemenu-border);
-
 }
 
 .home .sidemenu li {
@@ -48,11 +47,13 @@
     width: 75%;
     line-height: 1.5;
 }
-.content p span{
+
+.content p span {
     color: var(--alert-color);
 }
-.content p span span{
-    text-decoration: underline blue;  
+
+.content p span span {
+    text-decoration: underline blue;
 }
 
 .content form {
@@ -84,6 +85,13 @@
     border-radius: 5px;
     cursor: pointer;
     border: 1px solid var(--box-border);
+}
+
+.content select {
+    padding: 5px;
+    border-radius: 3px;
+    border: 1px solid var(--box-border);
+    color: #000;
 }
 
 .table {
@@ -124,7 +132,6 @@
     border-radius: 4px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     white-space: nowrap;
-
 }
 
 .table-items:hover .popup {
@@ -171,6 +178,93 @@
 }
 
 .table-items .red {
+    color: #ff4646;
+    text-align: center;
+}
+
+/* container */
+
+.container {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 40px;
+}
+
+.container .container-items {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 1em;
+}
+
+.container .items {
+    width: 162px;
+    height: 200px;
+    border: 1px solid;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    overflow: auto;
+    border-radius: 5px;
+    background: var(--table-body-background);
+    transition: transform 0.1s ease;
+    position: relative;
+}
+
+.container .items:hover {
+    transform: translateY(-10px);
+}
+
+.container .cards-popup {
+    display: none;
+    position: absolute;
+    right: 2%;
+    top: 30%;
+    background-color: #ccc;
+    color: #000;
+    transform: translateY(50%);
+    padding: 0px 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    white-space: nowrap;
+}
+
+.container .items:hover .cards-popup {
+    display: block;
+    animation-duration: 4s;
+}
+
+.container .coin {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    text-align: center;
+}
+
+.container img {
+    width: 40px;
+    margin-left: 40px;
+}
+
+.container .items.items::-webkit-scrollbar {
+    display: none;
+}
+
+.container .prices {
+    display: flex;
+    flex-direction: column;
+}
+
+.green {
+    color: #00D515;
+    text-align: center;
+}
+
+.red {
     color: #ff4646;
     text-align: center;
 }

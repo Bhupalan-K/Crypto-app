@@ -8,6 +8,7 @@ const Home = () => {
   const { coins, currency } = useContext(CoinContext);
   const [displayCoins, setDisplayCoins] = useState([])
   const [search, setSearch] = useState('');
+  const [view, setView] = useState('table')
   const menuRef = useRef(null);
 
   useEffect(() => {
@@ -54,11 +55,15 @@ const Home = () => {
       <div className="content">
         <h1>Crypto Tracker !</h1>
         <p>Welcome to Crypto Tracker,
-          The Future of Money is Digital. Embrace It<br/>
-          <span>(Click on Table Coins to see Prices in {coins && coins.length > 0 && (
-          <Link to={`/coin/${coins[0].id}`}><span>Charts</span></Link>
-        )})</span>
+          The Future of Money is Digital. Embrace It<br />
+          <span>(Click on Coins to see Prices in {coins && coins.length > 0 && (
+            <Link to={`/coin/${coins[0].id}`}><span>Charts</span></Link>
+          )})</span>
         </p>
+        <select value={view} onChange={e => setView(e.target.value)}>
+          <option value="table">Table view</option>
+          <option value="card">Card view</option>
+        </select>
         <form onSubmit={handleSearch} >
           <input type='text' placeholder='Search cryptos'
             value={search} onChange={handleInputChange} list='coinlist' />
@@ -68,7 +73,7 @@ const Home = () => {
           <button type='submit'>Search</button>
         </form>
       </div>
-      <div className="table">
+      {view === 'table' && <div className="table">
         <div className="table-items">
           <p>Rank</p>
           <p>Coins</p>
@@ -92,7 +97,31 @@ const Home = () => {
             </Link>
           ))
         }
-      </div>
+      </div>}
+      {view === 'card' && <div className="container">
+        <div className="container-items">
+          {displayCoins.filter(displayCoin => displayCoin.name.toLowerCase().includes(search.toLowerCase()))
+            .slice(0, 14).map((item, index) => (
+              <Link to={`/coin/${item.id}`} key={index}>
+                <div className="items">
+                  <div className="coin">
+                    <p><strong>{item.name + "-" + item.symbol}</strong></p>
+                    <img src={item.image} alt="" />
+                  </div>
+                  <div className="prices">
+                    <p>{`Rank - ${item.market_cap_rank}`}</p>
+                    <p>{`Price: ${currency.symbol}${item.current_price.toLocaleString()}`}</p>
+                    <p>24H change:<span className={item.price_change_percentage_24h > 0 ? 'green' : 'red'}>
+                      {Math.floor(item.price_change_percentage_24h * 100) / 100}</span></p>
+                    <p>Market Cap:<br /><span>{currency.symbol}{item.market_cap.toLocaleString()}</span></p>
+                    <p className='cards-popup'>Click to see in chart</p>
+                  </div>
+                </div>
+              </Link>
+            ))
+          }
+        </div>
+      </div>}
     </div>
   )
 }
